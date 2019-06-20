@@ -15,7 +15,7 @@ public class SwaggerConfig {
   public Docket api() {
     return new Docket(DocumentationType.SWAGGER_2)
             .select()
-            .apis(RequestHandlerSelectors.basePackage("com.javabom.board"))
+            .apis(RequestHandlerSelectors.basePackage("com.javabom.board.controller"))
             .paths(PathSelectors.any())
             .build();
   }

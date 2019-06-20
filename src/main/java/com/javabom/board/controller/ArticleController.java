@@ -1,8 +1,13 @@
 package com.javabom.board.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.javabom.board.model.JsonTestVO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 //  클라이언트로부터 들어온 Request를 어느 Service 객체로 보내주어야 하는지 매핑하기 위한 역할
@@ -10,12 +15,36 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleController {
 
   @GetMapping("/articles")
-  public String getArticles() {
-    return "Hello?";
+  public JsonTestVO getArticles() {
+    JsonTestVO articles = new JsonTestVO();
+    articles.setName("hi");
+    articles.setAge("20");
+
+    return articles;
   }
 
-  @GetMapping("/article")
+  @GetMapping("/article/{id}")
   public String getArticle() {
+
     return "Article";
   }
+
+  @GetMapping(value = "/{id}")
+  public ResponseEntity<String> getId(String id) {
+    String aaa = "a";
+    ResponseEntity<String> a = new ResponseEntity<String>(aaa, HttpStatus.OK);
+
+    return a;
+  }
+
+  @RequestMapping(value="/a/{id}", method = RequestMethod.GET)
+  public ResponseEntity<List<String>> getMeasOpers(HttpServletRequest request, String test) {
+    List<String> testMeasOperList = new ArrayList<String>();
+    for (int i = 0; i < 10; i++) {
+      testMeasOperList.add("Meas_Oper_" + i);
+    }
+    ResponseEntity<List<String>> entity = new ResponseEntity<List<String>>(testMeasOperList, HttpStatus.OK);
+    return entity;
+  }
+
 }
