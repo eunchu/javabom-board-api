@@ -1,14 +1,15 @@
 package com.javabom.board.service;
 
 import com.javabom.board.entity.ArticlesEntity;
-import org.springframework.data.annotation.CreatedBy;
 
 import java.util.List;
 
 public interface ArticlesService {
 
-    List<ArticlesEntity> findAllArticles();
+    List<ArticlesEntity> findAllArticle();
 
-    ArticlesEntity create(ArticlesEntity articlesEntity);
+//    Articles createArticle(final Articles newArticle);
+
+//    ArticlesEntity create(ArticlesEntity articlesEntity);
 
 }

@@ -1,50 +1,58 @@
 package com.javabom.board.controller;
 
 import com.javabom.board.entity.ArticlesEntity;
-import com.javabom.board.model.articles.Articles;
 import com.javabom.board.service.ArticlesService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1")
+@Slf4j
+@RequestMapping("api/v1") // class와 경로를 매핑함
+@RequiredArgsConstructor
 public class ArticleController {
 
+    public Ar() {};
+
     @Autowired // 빈 간의 의존성
-    private ArticlesService articlesService;
+    private final ArticlesService articlesService;
 
     @GetMapping("/articles")
-    public ResponseEntity<List<ArticlesEntity>> getArticles() {
-        final List<ArticlesEntity> articlesList = articlesService.findAllArticles();
-
-        if (articlesList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
+    public ResponseEntity<List<ArticlesEntity>> findAllArticle() {
+        final List<ArticlesEntity> articlesList = articlesService.findAllArticle();
+//
+//        if (articlesList.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
 
         return new ResponseEntity<List<ArticlesEntity>>(articlesList, HttpStatus.OK);
+//        return ResponseEntity.ok(articlesService.findAllArticle());
     }
 
 //    @PostMapping("/article/{id}")
-//    public ResponseEntity<ArticlesEntity> createAricle(@RequestBody final Articles articles)
+//    @ResponseBody
+//    public ResponseEntity<ArticlesEntity> createAricle(@PathVariable("id") Long id) {
+//        return articlesService.create(id);
+//    }
 
 
-    @PostMapping("test")
-    public ResponseEntity<ArticlesEntity> save(WebRequest request, ArticlesEntity articlesEntity) {
-        ArticlesEntity article = new ArticlesEntity();
-
-//        article.setId();
-        article.setContent("test");
-        article.setTitle("hi");
-
-        ResponseEntity<ArticlesEntity> articlesEntityResponseEntity = new ResponseEntity<ArticlesEntity>(article, HttpStatus.OK);
-
-        return articlesEntityResponseEntity;
-    }
+//    @PostMapping("test")
+//    public ResponseEntity<ArticlesEntity> save(WebRequest request, ArticlesEntity articlesEntity) {
+//        ArticlesEntity article = new ArticlesEntity();
+//
+////        article.setId();
+////        article.setContent("test");
+////        article.setTitle("hi");
+//
+//        ResponseEntity<ArticlesEntity> articlesEntityResponseEntity = new ResponseEntity<ArticlesEntity>(article, HttpStatus.OK);
+//
+//        return articlesEntityResponseEntity;
+//    }
 
 
 

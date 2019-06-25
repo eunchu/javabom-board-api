@@ -13,4 +13,6 @@ import lombok.Setter;
 public class Articles {
     private String type;
     private String id;
+    private Attributes attributes;
+    private Links links;
 }
