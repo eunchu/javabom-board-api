@@ -10,11 +10,11 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder // ?
 public class ArticlesEntity {
 
     @Id // 식별자 필드, 테이블의 기본 키PK(Primary Key)에 매핑
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // id 자동 생성
+    @GeneratedValue(strategy = GenerationType.AUTO) // id 자동 생성
     private Long id;
 
     @Column // 테이블의 칼럼에 매핑

@@ -18,11 +18,19 @@ public class ArticlesServicelmpl implements ArticlesService {
     private final ArticlesRepository articlesRepository;
 
     @Override
-    public List<Articles> findAllArticles() {
-        List<Articles> articles = new ArrayList<>();
-        articlesRepository.findAll().forEach(e -> articles.add(e));
-        return articles;
+    public List<ArticlesEntity> findAllArticles() {
 
-//        return articlesRepository.findAll();
+        List<ArticlesEntity> articles = new ArrayList<ArticlesEntity>();
+
+        articles = articlesRepository.findAll();
+
+        return articles;
     }
+
+    @Override
+    public ArticlesEntity create(ArticlesEntity articlesEntity) {
+
+        return articlesRepository.save(articlesEntity);
+    }
+
 }
