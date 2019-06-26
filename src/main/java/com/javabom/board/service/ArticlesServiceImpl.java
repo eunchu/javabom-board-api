@@ -13,7 +13,6 @@ import java.util.Optional;
 @Service
 //@RequiredArgsConstructor // lombok annotation
 @AllArgsConstructor
-
 public class ArticlesServiceImpl implements ArticlesService {
 
 //    생성자
@@ -22,23 +21,36 @@ public class ArticlesServiceImpl implements ArticlesService {
 //    }
 
     @Autowired
-    private final ArticlesRepository articlesRepository;
+    private ArticlesRepository articlesRepository;
 
     @Override
-    public List<ArticlesEntity> findAllArticle() {
-
-        List<ArticlesEntity> allArticles = new ArrayList<ArticlesEntity>();
-
-        allArticles = articlesRepository.findAll();
-
-        return allArticles;
+    public List<ArticlesEntity> findAll() {
+//        List<ArticlesEntity> allArticles = new ArrayList<ArticlesEntity>();
+//        allArticles = articlesRepository.findAll();
+//        return allArticles;
+        return articlesRepository.findAll();
     }
 
     @Override
-    public ArticlesEntity saveArticle(ArticlesEntity articlesEntity) {
+    public ArticlesEntity save(ArticlesEntity articlesEntity) {
         return articlesRepository.save(articlesEntity);
     }
 
+    @Override
+    public Optional<ArticlesEntity> findById(Long id) {
+        return articlesRepository.findById(id);
+    }
+
+    @Override
+    // void 는 return 값을 가지지 않음
+    public void update(ArticlesEntity articlesEntity) {
+        articlesRepository.save(articlesEntity);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        articlesRepository.deleteById(id);
+    }
 }
 
 

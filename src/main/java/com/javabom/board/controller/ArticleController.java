@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -21,26 +22,26 @@ public class ArticleController {
     private final ArticlesService articlesService;
 
     @GetMapping("/articles")
-    public ResponseEntity<List<ArticlesEntity>> findAllArticle() {
-        final List<ArticlesEntity> articlesList = articlesService.findAllArticle();
-//
+    public ResponseEntity<List<ArticlesEntity>> getArticles() {
+        final List<ArticlesEntity> articlesList = articlesService.findAll();
         if (articlesList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-
         return new ResponseEntity<List<ArticlesEntity>>(articlesList, HttpStatus.OK);
-//        return ResponseEntity.ok(articlesService.findAllArticle());
     }
 
     @PostMapping
     public ResponseEntity create(@RequestBody ArticlesEntity articlesEntity) {
 
-        ArticlesEntity article = new ArticlesEntity();
-
-        article = articlesService.saveArticle(articlesEntity);
-
-        return new ResponseEntity<ArticlesEntity>(article, HttpStatus.OK);
+//        ArticlesEntity article = new ArticlesEntity();
+//        article = articlesService.save(articlesEntity);
+        return new ResponseEntity<>(new ArticlesEntity(), HttpStatus.CREATED);
+//        return ResponseEntity.ok(articlesService.save(articlesEntity));
     }
 
-
+    @GetMapping("/articles/{id}")
+    public ResponseEntity<ArticlesEntity> findById(@PathVariable Long id) {
+        Optional<ArticlesEntity> article = articlesService.findById(id);
+        return ResponseEntity.ok(article.get());
+    }
 }

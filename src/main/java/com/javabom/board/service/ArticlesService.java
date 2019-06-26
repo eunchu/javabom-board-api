@@ -3,10 +3,22 @@ package com.javabom.board.service;
 import com.javabom.board.entity.ArticlesEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ArticlesService {
 
-    List<ArticlesEntity> findAllArticle();
+    // Read : 전체목록
+    List<ArticlesEntity> findAll();
 
-    ArticlesEntity saveArticle(ArticlesEntity articlesEntity);
+    // Create : 목록 생성
+    ArticlesEntity save(ArticlesEntity articlesEntity);
+
+    //
+    Optional<ArticlesEntity> findById(Long id);
+
+    // Update : 목록 수정
+    void update(ArticlesEntity articlesEntity);
+
+    // Delete : 목록 삭제
+    void deleteById(Long id);
 }
