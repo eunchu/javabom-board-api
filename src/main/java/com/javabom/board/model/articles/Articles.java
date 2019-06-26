@@ -12,7 +12,7 @@ import lombok.Setter;
 
 public class Articles {
     private String type;
-    private String id;
+    private Long id;
     private Attributes attributes;
     private Links links;
 }

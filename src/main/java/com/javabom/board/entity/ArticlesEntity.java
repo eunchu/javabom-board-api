@@ -1,7 +1,6 @@
 package com.javabom.board.entity;
 
 import lombok.*;
-
 import javax.persistence.*;
 
 @Entity // 객체를 테이블과 매핑 할 엔티티라고 JPA에게 알려주는 역할
@@ -11,7 +10,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder // ?
-@Data
 public class ArticlesEntity {
 
     @Id // 식별자 필드, 테이블의 기본 키PK(Primary Key)에 매핑

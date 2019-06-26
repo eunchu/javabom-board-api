@@ -8,8 +8,5 @@ public interface ArticlesService {
 
     List<ArticlesEntity> findAllArticle();
 
-//    Articles createArticle(final Articles newArticle);
-
-//    ArticlesEntity create(ArticlesEntity articlesEntity);
-
+    ArticlesEntity saveArticle(ArticlesEntity articlesEntity);
 }
