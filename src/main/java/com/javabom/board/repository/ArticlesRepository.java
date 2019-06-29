@@ -1,6 +1,7 @@
 package com.javabom.board.repository;
 
 import com.javabom.board.entity.ArticlesEntity;
+import com.javabom.board.model.articles.Articles;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -12,10 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Articles {
-    private List<Articles> data;
-//    private String type;
-//    private Long id;
-//    private Attributes attributes;
-//    private Links links;
+public class Data {
+//  private List<String> data;
+  private String type;
+  private Long id;
+  private Attributes attributes;
+  private Links links;
 }
