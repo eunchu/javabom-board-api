@@ -2,6 +2,9 @@ package com.javabom.board.controller;
 
 import com.javabom.board.entity.ArticlesEntity;
 import com.javabom.board.model.articles.Articles;
+import com.javabom.board.model.articles.Attributes;
+import com.javabom.board.model.articles.Links;
+import com.javabom.board.model.response.ArticleWrapper;
 import com.javabom.board.service.ArticlesService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -12,7 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -34,20 +39,62 @@ public class ArticleController {
         return new ResponseEntity<List<ArticlesEntity>>(articlesList, HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity <ArticlesEntity> create(@RequestBody ArticlesEntity articlesEntity) {
+    @GetMapping("test")
+    public ResponseEntity<ArticleWrapper> getAllArticles() {
+        ArticlesEntity articlesEntity = new ArticlesEntity();
+        List<ArticlesEntity> articlesEntities = articlesService.findAll();
 
-//        Articles newArticle = articlesService.save(articlesEntity);
-//        newArticle.setData();
-//        return new ResponseEntity<>(new ArticlesEntity(), HttpStatus.CREATED);
-        return new ResponseEntity<>(articlesEntity, HttpStatus.OK);
-//        return ResponseEntity.ok(articlesService.save(articles));
+        List<Articles> articleList = new ArrayList<Articles>();
+        Articles articles = new Articles();
+        Attributes attributes = new Attributes();
+        Links links = new Links();
 
+        articles.setType("articles");
+        articles.setId(articlesEntity.getId());
+        articles.setAttributes(attributes);
+        articles.setLinks(links);
+
+        attributes.setTitle("Initial Article");
+        attributes.setContent("This is content of article");
+        links.setSelf("https://board-api/api/v1/articles/" + articlesEntity.getId());
+
+        ArticleWrapper articleWrapper = new ArticleWrapper();
+        articleWrapper.setData(articles);
+
+        return new ResponseEntity<ArticleWrapper>(articleWrapper, HttpStatus.OK);
     }
 
-//    @GetMapping("/articles/{id}")
-//    public ResponseEntity<ArticlesEntity> findById(@PathVariable Long id) {
-//        Optional<ArticlesEntity> article = articlesService.findById(id);
-//        return ResponseEntity.ok(article.get());
-//    }
+    @PostMapping
+    public ResponseEntity <ArticleWrapper> create() {
+        ArticlesEntity articlesEntity = new ArticlesEntity();
+        List<ArticlesEntity> articlesEntities = articlesService.findAll();
+
+        List<Articles> articleList = new ArrayList<Articles>();
+        Articles articles = new Articles();
+        Attributes attributes = new Attributes();
+        Links links = new Links();
+
+        articles.setType("articles");
+//        articles.setId(articlesEntity.getId());
+        articles.setAttributes(attributes);
+        articles.setLinks(links);
+
+        attributes.setTitle("Initial Article");
+        attributes.setContent("This is content of article");
+        links.setSelf("https://board-api/api/v1/articles/" + articlesEntity.getId());
+
+        ArticleWrapper articleWrapper = new ArticleWrapper();
+        articleWrapper.setData(articles);
+
+        return new ResponseEntity<ArticleWrapper>(articleWrapper, HttpStatus.OK);
+
+//        return new ResponseEntity<>(articlesService.save(articlesEntity), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/articles/{id}")
+    public ResponseEntity<ArticlesEntity> findById(@PathVariable Long id) {
+        Optional<ArticlesEntity> article = articlesService.findById(id);
+        return ResponseEntity.ok(article.get());
+//        return new ResponseEntity(article, HttpStatus.OK);
+    }
 }

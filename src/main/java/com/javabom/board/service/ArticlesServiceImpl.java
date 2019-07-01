@@ -30,9 +30,7 @@ public class ArticlesServiceImpl implements ArticlesService {
 
   @Override
   public List<ArticlesEntity> findAll() {
-        List<ArticlesEntity> articlesEntities = new ArrayList<ArticlesEntity>();
-//        allArticles = articlesRepository.findAll();
-//        return allArticles;
+    List<ArticlesEntity> articlesEntities = new ArrayList<ArticlesEntity>();
     return articlesRepository.findAll();
   }
 
@@ -41,15 +39,14 @@ public class ArticlesServiceImpl implements ArticlesService {
     return articlesRepository.save(articlesEntity);
   }
 
-//  @Override
-//  public Optional<Articles> findById(Long id) {
-//    return articlesRepository.findById(id);
-//  }
+  @Override
+  public Optional<ArticlesEntity> findById(Long id) {
+    return articlesRepository.findById(id);
+  }
 //
 //  @Override
-//  // void 는 return 값을 가지지 않음
-//  public void update(Articles articles) {
-//    articlesRepository.save(articles);
+//  public void update(ArticlesEntity articlesEntity) {
+//    articlesRepository.save(articlesEntity);
 //  }
 //
 //  @Override

@@ -1,5 +1,6 @@
-package com.javabom.board.model.articles;
+package com.javabom.board.model.response;
 
+import com.javabom.board.model.articles.Articles;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Data {
-//  private List<String> data;
-  private String type;
-  private Long id;
-  private Attributes attributes;
-  private Links links;
+public class ArticleWrapper {
+  private Articles data;
 }

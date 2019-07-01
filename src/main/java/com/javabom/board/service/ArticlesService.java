@@ -15,10 +15,10 @@ public interface ArticlesService {
     ArticlesEntity save(ArticlesEntity articlesEntity);
 
     //
-//    Optional<Articles> findById(Long id);
+    Optional<ArticlesEntity> findById(Long id);
 
     // Update : 목록 수정
-//    void update(Articles articles);
+//    void update(ArticlesEntity articlesEntity);
 
     // Delete : 목록 삭제
 //    void deleteById(Long id);

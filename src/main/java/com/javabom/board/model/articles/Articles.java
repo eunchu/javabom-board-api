@@ -13,9 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 
 public class Articles {
-    private List<Articles> data;
-//    private String type;
-//    private Long id;
-//    private Attributes attributes;
-//    private Links links;
+    private String type;
+    private Long id;
+    private Attributes attributes;
+    private Links links;
 }
