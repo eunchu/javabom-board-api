@@ -4,6 +4,7 @@ import com.javabom.board.entity.ArticlesEntity;
 import com.javabom.board.model.articles.Articles;
 import com.javabom.board.model.articles.Attributes;
 import com.javabom.board.model.articles.Links;
+import com.javabom.board.model.response.ArticleWrapper;
 import com.javabom.board.repository.ArticlesRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -29,13 +30,39 @@ public class ArticlesServiceImpl implements ArticlesService {
   private ArticlesRepository articlesRepository;
 
   @Override
-  public List<ArticlesEntity> findAll() {
-    List<ArticlesEntity> articlesEntities = new ArrayList<ArticlesEntity>();
-    return articlesRepository.findAll();
+  public List<Articles> findAll() {
+//    List<ArticlesEntity> articlesEntities = new ArrayList<ArticlesEntity>();
+    List<ArticlesEntity> articlesEntities = articlesRepository.findAll();
+
+    List<Articles> articlesList = new ArrayList<Articles>();
+
+    for(int i =0; i < articlesEntities.size(); i++) {
+      Articles articles = new Articles();
+      Attributes attributes = new Attributes();
+      Links links = new Links();
+
+      attributes.setTitle(articlesEntities.get(i).getTitle());
+      attributes.setContent(articlesEntities.get(i).getContents());
+      articles.setId(articlesEntities.get(i).getId());
+      articles.setType("articles");
+      links.setSelf("dddddddddddd" + articlesEntities.get(i).getId());
+      articles.setAttributes(attributes);
+      articles.setLinks(links);
+
+      articlesList.add(articles);
+    }
+
+    ArticleWrapper articleWrapper = new ArticleWrapper(articlesList);
+
+    return articlesList;
+//    return (List<ArticlesEntity>) articleWrapper;
+//    return articlesRepository.findAll();
   }
 
   @Override
   public ArticlesEntity save(ArticlesEntity articlesEntity) {
+
+
     return articlesRepository.save(articlesEntity);
   }
 

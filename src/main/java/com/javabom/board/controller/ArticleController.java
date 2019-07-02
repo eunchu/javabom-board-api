@@ -30,66 +30,53 @@ public class ArticleController {
     @Autowired // 빈 간의 의존성
     private final ArticlesService articlesService;
 
+//    @GetMapping("/articles")
+//    public ResponseEntity<List<ArticlesEntity>> getArticleList() {
+//        final List<ArticlesEntity> articlesList = articlesService.findAll();
+//        if (articlesList.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<List<ArticlesEntity>>(articlesList, HttpStatus.OK);
+//    }
+
     @GetMapping("/articles")
-    public ResponseEntity<List<ArticlesEntity>> getArticleList() {
-        final List<ArticlesEntity> articlesList = articlesService.findAll();
-        if (articlesList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<List<ArticlesEntity>>(articlesList, HttpStatus.OK);
-    }
+    public ResponseEntity<ArticleWrapper> getArticleList() {
+        final List<Articles> articlesList = articlesService.findAll();
+        ArticleWrapper articleWrapper = new ArticleWrapper(articlesList);
 
-    @GetMapping("test")
-    public ResponseEntity<ArticleWrapper> getAllArticles() {
-        ArticlesEntity articlesEntity = new ArticlesEntity();
-        List<ArticlesEntity> articlesEntities = articlesService.findAll();
-
-        List<Articles> articleList = new ArrayList<Articles>();
-        Articles articles = new Articles();
-        Attributes attributes = new Attributes();
-        Links links = new Links();
-
-        articles.setType("articles");
-        articles.setId(articlesEntity.getId());
-        articles.setAttributes(attributes);
-        articles.setLinks(links);
-
-        attributes.setTitle("Initial Article");
-        attributes.setContent("This is content of article");
-        links.setSelf("https://board-api/api/v1/articles/" + articlesEntity.getId());
-
-        ArticleWrapper articleWrapper = new ArticleWrapper();
-        articleWrapper.setData(articles);
+//        if (articlesList.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
 
         return new ResponseEntity<ArticleWrapper>(articleWrapper, HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity <ArticleWrapper> create() {
-        ArticlesEntity articlesEntity = new ArticlesEntity();
-        List<ArticlesEntity> articlesEntities = articlesService.findAll();
-
-        List<Articles> articleList = new ArrayList<Articles>();
-        Articles articles = new Articles();
-        Attributes attributes = new Attributes();
-        Links links = new Links();
-
-        articles.setType("articles");
-//        articles.setId(articlesEntity.getId());
-        articles.setAttributes(attributes);
-        articles.setLinks(links);
-
-        attributes.setTitle("Initial Article");
-        attributes.setContent("This is content of article");
-        links.setSelf("https://board-api/api/v1/articles/" + articlesEntity.getId());
-
-        ArticleWrapper articleWrapper = new ArticleWrapper();
-        articleWrapper.setData(articles);
-
-        return new ResponseEntity<ArticleWrapper>(articleWrapper, HttpStatus.OK);
-
-//        return new ResponseEntity<>(articlesService.save(articlesEntity), HttpStatus.CREATED);
-    }
+//    @PostMapping
+//    public ResponseEntity <ArticleWrapper> create() {
+//        ArticlesEntity articlesEntity = new ArticlesEntity();
+//        List<ArticlesEntity> articlesEntities = articlesService.findAll();
+//
+//        List<Articles> articleList = new ArrayList<Articles>();
+//        Articles articles = new Articles();
+//        Attributes attributes = new Attributes();
+//        Links links = new Links();
+//
+//        articles.setType("articles");
+////        articles.setId(articlesEntity.getId());
+//        articles.setAttributes(attributes);
+//        articles.setLinks(links);
+//
+//        attributes.setTitle("Initial Article");
+//        attributes.setContent("This is content of article");
+//        links.setSelf("https://board-api/api/v1/articles/" + articlesEntity.getId());
+//
+//        ArticleWrapper articleWrapper = new ArticleWrapper();
+//        articleWrapper.setData(articles);
+//
+//        return new ResponseEntity<ArticleWrapper>(articleWrapper, HttpStatus.OK);
+//
+////        return new ResponseEntity<>(articlesService.save(articlesEntity), HttpStatus.CREATED);
+//    }
 
     @GetMapping("/articles/{id}")
     public ResponseEntity<ArticlesEntity> findById(@PathVariable Long id) {

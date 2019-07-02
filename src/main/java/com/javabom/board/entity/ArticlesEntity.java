@@ -21,6 +21,12 @@ public class ArticlesEntity {
     @Column // 테이블의 칼럼에 매핑
     private String type;
 
+    @Column
+    private String title;
+
+    @Column
+    private String contents;
+
 //    @Column
 //    private String content;
 //    @Column

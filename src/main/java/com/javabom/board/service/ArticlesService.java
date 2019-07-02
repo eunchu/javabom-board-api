@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ArticlesService {
 
     // Read : 전체목록
-    List<ArticlesEntity> findAll();
+    List<Articles> findAll();
 
     // Create : 목록 생성
     ArticlesEntity save(ArticlesEntity articlesEntity);
